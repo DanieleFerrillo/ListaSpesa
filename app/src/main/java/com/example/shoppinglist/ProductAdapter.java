@@ -42,11 +42,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+        ProductItem currentItem = productList.get(position);
 
+        holder.imageView.setImageResource(currentItem.getImageResource());
+        holder.textView.setText(currentItem.getText1());
+        holder.textView2.setText(currentItem.getText2());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return productList.size();
     }
 }
