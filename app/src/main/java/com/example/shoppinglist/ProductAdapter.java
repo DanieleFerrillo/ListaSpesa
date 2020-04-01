@@ -9,7 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+    private ArrayList<ProductItem> productList;
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder{
         public ImageView imageView;
@@ -23,6 +26,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             textView = itemView.findViewById(R.id.textView);
             textView2 = itemView.findViewById(R.id.textView2);
         }
+    }
+
+    public ProductAdapter(ArrayList<ProductItem> productArrayList) {
+        productList = productArrayList;
     }
 
     @NonNull
