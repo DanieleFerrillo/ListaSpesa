@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<ProductItem> productList;
     private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
+    private ProductAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
@@ -34,5 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+        
     }
 }

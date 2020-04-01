@@ -13,6 +13,14 @@ import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
     private ArrayList<ProductItem> productList;
+    private OnItemClickListener listener;
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener itemListener){
+        listener = itemListener;
+    }
 
     public static class ProductViewHolder extends RecyclerView.ViewHolder{
         public ImageView imageView;
@@ -20,11 +28,23 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         public TextView textView2;
 
 
-        public ProductViewHolder(@NonNull View itemView) {
+        public ProductViewHolder(View itemView, final OnItemClickListener itemListener) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
             textView = itemView.findViewById(R.id.textView);
             textView2 = itemView.findViewById(R.id.textView2);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemListener != null){
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION){
+                            itemListener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -36,7 +56,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v  = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_item, parent, false);
-        ProductViewHolder  evh = new ProductViewHolder(v);
+        ProductViewHolder  evh = new ProductViewHolder(v, listener);
         return evh;
     }
 
